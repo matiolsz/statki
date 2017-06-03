@@ -1,0 +1,29 @@
+# depslib dependency file v1.0
+1496525655 source:c:\users\matio\documents\github\statki\statki\main.cpp
+	<iostream>
+	<vector>
+	<fstream>
+	<stdlib.h>
+	<time.h>
+	"board.h"
+
+1496526633 c:\users\matio\documents\github\statki\statki\board.h
+	<iostream>
+	<vector>
+
+1496525933 source:c:\users\matio\documents\github\statki\statki\board.cpp
+	<iostream>
+	<vector>
+	<fstream>
+	<stdlib.h>
+	<time.h>
+	"board.h"
+
+1496526446 source:c:\users\matio\documents\github\statki\statki\computer.cpp
+	"board.h"
+	"computer.h"
+
+1496526389 c:\users\matio\documents\github\statki\statki\computer.h
+	"board.h"
+	<vector>
+
