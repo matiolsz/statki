@@ -3,13 +3,15 @@
 #include <fstream>
 #include <stdlib.h>
 #include <time.h>
+#include <conio.h>
+#include <windows.h>
 
 #include "board.h"
 #include "computer.h"
 
 using namespace std;
 
-int main(int argc, char **argv)
+int main()
 {
     Board *player = new Board;
     Board *enemy = new Board;
@@ -18,17 +20,77 @@ int main(int argc, char **argv)
     int x,y;
     bool czydalej;
 
-    if(argc == 2)
+    string nazwapliku;
+
+    int aktualnaopcja = 0; //0 - wczytaj 1 - wyjscie
+    bool out = false;
+    int znak = 0;
+
+    while(out == false)
     {
-        if(stworz_uzytkownikow(argv[1],player,enemy)==false)
+
+        system("cls");
+        cout << "NACISNIJ STRZALKE W PRAWO, ABY WYBRAC" << endl;
+
+        for(int i = 0; i <= 2; i++)
         {
-            cerr<<"blad wczytywania"<<endl;
-            return 1;
+            if(i == aktualnaopcja)
+            {
+                cout << "#";
+            }
+            cout <<"\t";
+
+            switch(i)
+            {
+            case 0:
+                cout << "WCZYTAJ PLIK" << endl;
+                break;
+            case 1:
+                cout << "WYJSCIE Z PROGRAMU" << endl;
+            }
         }
-    } else {
-        cout << "nie podano pliku konfiguracyjnego." << endl;
+
+        znak = getch();
+
+        switch((znak = getch()))
+        {
+        case 72://up
+            if(aktualnaopcja > 0)
+            {
+                aktualnaopcja--;
+            }
+            break;
+        case 80://down
+            if(aktualnaopcja < 1)
+            {
+                aktualnaopcja++;
+            }
+            break;
+        case 77:
+            out = true;
+            break;
+        }
+
+        cin.clear();
+        cin.sync();
+
+    }
+
+    if(aktualnaopcja == 1)
+    {
+        return 0;
+    }
+    system("cls");
+    cin >> nazwapliku;
+
+    if(stworz_uzytkownikow(nazwapliku,player,enemy)==false)
+    {
+        cerr<<"blad wczytywania"<<endl;
         return 1;
     }
+
+
+    system("cls");
 
 
 
@@ -63,7 +125,8 @@ int main(int argc, char **argv)
                     zapisdopliku("statki3.txt",player,enemy);
                     cout<<"czy chcesz wyjsc z gry?(t/n)"<<endl;
                     cin>>p;
-                    if(p=="t"){
+                    if(p=="t")
+                    {
                         return 0;
                     }
                 }
@@ -71,7 +134,8 @@ int main(int argc, char **argv)
                 cin.sync();
             }
 
-            if(x>=player->szerokosc||y>=player->wysokosc){
+            if(x>=player->szerokosc||y>=player->wysokosc)
+            {
                 cout << "takiego pola nie ma na planszy" << endl;
                 czydalej = false;
             }

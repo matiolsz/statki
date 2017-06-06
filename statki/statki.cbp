@@ -20,6 +20,10 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="board.cpp" />
+		<Unit filename="board.h" />
+		<Unit filename="computer.cpp" />
+		<Unit filename="computer.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />
