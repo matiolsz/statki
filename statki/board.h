@@ -1,14 +1,16 @@
 #ifndef BOARD_H_INCLUDED
 #define BOARD_H_INCLUDED
 #include <iostream>
-#include <vector>
+#include "lista.h"
+
+
 using namespace std;
 
 struct Board
 {
     char **plansza;
     int szerokosc,wysokosc;
-    vector <int>okrety;
+    struct lista *okrety;
     int pozostalepola;
 };
 
@@ -17,11 +19,6 @@ enum pozycjastatku
     PIONOWY,
     POZIOMY
 };
-
-const char WODA = '0'; //ASCII Character Code
-const char TRAFIONY = 'X';
-const char STATEK = '1';
-const char PUDLO = 'P';
 
 int losowaliczba(int limit);
 pozycjastatku losowapozycja();

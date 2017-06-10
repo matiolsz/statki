@@ -1,29 +1,38 @@
 # depslib dependency file v1.0
-1496525655 source:c:\users\matio\documents\github\statki\statki\main.cpp
+1496777085 source:c:\users\matio\documents\github\statki\statki\main.cpp
 	<iostream>
 	<vector>
 	<fstream>
 	<stdlib.h>
 	<time.h>
-	"board.h"
-
-1496526633 c:\users\matio\documents\github\statki\statki\board.h
-	<iostream>
-	<vector>
-
-1496525933 source:c:\users\matio\documents\github\statki\statki\board.cpp
-	<iostream>
-	<vector>
-	<fstream>
-	<stdlib.h>
-	<time.h>
-	"board.h"
-
-1496526446 source:c:\users\matio\documents\github\statki\statki\computer.cpp
+	<conio.h>
+	<windows.h>
 	"board.h"
 	"computer.h"
 
-1496526389 c:\users\matio\documents\github\statki\statki\computer.h
+1497133582 c:\users\matio\documents\github\statki\statki\board.h
+	<iostream>
+	"lista.h"
+
+1497133582 source:c:\users\matio\documents\github\statki\statki\board.cpp
+	<iostream>
+	<fstream>
+	<stdlib.h>
+	<time.h>
 	"board.h"
-	<vector>
+	"lista.h"
+
+1497135863 source:c:\users\matio\documents\github\statki\statki\computer.cpp
+	"board.h"
+	"computer.h"
+
+1497135699 c:\users\matio\documents\github\statki\statki\computer.h
+	"board.h"
+	"lista.h"
+
+1497132703 c:\users\matio\documents\github\statki\statki\lista.h
+
+1497133347 source:c:\users\matio\documents\github\statki\statki\lista.cpp
+	<iostream>
+	"lista.h"
 

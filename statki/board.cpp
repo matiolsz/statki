@@ -1,10 +1,11 @@
 #include <iostream>
-#include <vector>
+//#include <vector>
 #include <fstream>
 #include <stdlib.h>
 #include <time.h>
 
 #include "board.h"
+#include "lista.h"
 
 int losowaliczba(int limit)
 {
@@ -25,22 +26,22 @@ pozycjastatku losowapozycja()
 
 bool strzal(Board *user, int x, int y)
 {
-    if(user->plansza[y][x]==WODA)
+    if(user->plansza[y][x]=='0')
     {
-        user->plansza[y][x]=PUDLO;
+        user->plansza[y][x]='P';
         return false;
     }
-    else if(user->plansza[y][x]==STATEK)
+    else if(user->plansza[y][x]=='1')
     {
-        user->plansza[y][x]=TRAFIONY;
+        user->plansza[y][x]='X';
         user->pozostalepola--;
         return true;
     }
-    else if(user->plansza[y][x]==PUDLO)
+    else if(user->plansza[y][x]=='P')
     {
         return false;
     }
-    else if(user->plansza[y][x]==TRAFIONY)
+    else if(user->plansza[y][x]=='X')
     {
         return false;
     }
@@ -67,9 +68,9 @@ void wydrukujkomp(Board *user)
     {
         for(int j=0; j<user->szerokosc; j++)
         {
-            if(user->plansza[i][j]==STATEK)
+            if(user->plansza[i][j]=='1')
             {
-                cout<<WODA<<'\t';
+                cout<<'0'<<'\t';
             }
             else
                 cout<<user->plansza[i][j] << '\t';
@@ -171,9 +172,9 @@ bool losowe_statki(Board *user)
 {
     string n;
     //int ilosc_rodzajow=user->okrety.size()/2;
-    for(int i = 0; i<=user->okrety.size()-2; i+=2)
+    for(int i = 0; i<=rozmiar(user->okrety)-2; i+=2)
     {
-        for(int j=0; j<user->okrety.at(i+1); j++)
+        for(int j=0; j<elem_at(user->okrety,i+1); j++)
         {
 
             int proby = 0;
@@ -185,9 +186,9 @@ bool losowe_statki(Board *user)
                 int y=losowaliczba(user->wysokosc);
                 pozycjastatku z=losowapozycja();
 
-                if (sprawdz(user, x, y, user->okrety.at(i), z) == false)
+                if (sprawdz(user, x, y, elem_at(user->okrety,i), z) == false)
                 {
-                    wstawstatek(user, x, y, user->okrety.at(i), z);
+                    wstawstatek(user, x, y, elem_at(user->okrety,i), z);
                     udalosie = true;
                 }
                 else
@@ -215,6 +216,9 @@ bool stworz_uzytkownikow(string nazwa_pliku, Board *player, Board *komp)
         cerr<<"blad otwarcia pliku"<<endl;
         return false;
     }
+
+    player->okrety = new lista;
+    komp->okrety = new lista;
 
     plik>>tryb;
     if(tryb=="NEWGAME")
@@ -250,15 +254,15 @@ bool stworz_uzytkownikow(string nazwa_pliku, Board *player, Board *komp)
         while(!plik.eof())
         {
             plik>>a;
-            player->okrety.push_back(a);
+            dodaj_koniec(player->okrety,a);
         }
 
         player->pozostalepola=0;
 
 
-        for(int i =0; i<player->okrety.size(); i+=2)
+        for(int i =0; i<rozmiar(player->okrety); i+=2)
         {
-            player->pozostalepola+=player->okrety.at(i)*player->okrety.at(i+1);
+            player->pozostalepola+=elem_at(player->okrety,i)*elem_at(player->okrety,i+1);
         }
         cout << "liczba pozostalych pol zajetych przez statki: " << player->pozostalepola<<endl;
 
@@ -315,7 +319,7 @@ bool stworz_uzytkownikow(string nazwa_pliku, Board *player, Board *komp)
             for(int j =0; j<player->szerokosc; j++)
             {
                 plik>>x[i][j];
-                if(x[i][j]==STATEK)
+                if(x[i][j]=='1')
                 {
                     player->pozostalepola++;
                 }
@@ -326,7 +330,7 @@ bool stworz_uzytkownikow(string nazwa_pliku, Board *player, Board *komp)
             for(int j =0; j<komp->szerokosc; j++)
             {
                 plik>>y[i][j];
-                if(y[i][j]==STATEK)
+                if(y[i][j]=='1')
                 {
                     komp->pozostalepola++;
                 }

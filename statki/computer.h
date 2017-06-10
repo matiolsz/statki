@@ -2,13 +2,13 @@
 #define COMPUTER_H_INCLUDED
 
 #include "board.h"
-#include <vector>
+#include "lista.h"
 
 struct Computer
 {
     bool czyszukastatku;
 
-    vector <int>ostatnistatek;
+    struct lista *ostatnistatek;
     int drugawspolrzedna;
     pozycjastatku pozycjaostatniegostatku;
     int dlugoscstatku;
